@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "airline": "apps/airline",
+    "airline-e2e": "apps/airline-e2e",
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces"
+  }
+}

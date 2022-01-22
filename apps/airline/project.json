@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/airline",
+  "sourceRoot": "apps/airline/src",
+  "prefix": "nx-docker-build",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/airline",
+        "index": "apps/airline/src/index.html",
+        "main": "apps/airline/src/main.ts",
+        "polyfills": "apps/airline/src/polyfills.ts",
+        "tsConfig": "apps/airline/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/airline/src/favicon.ico", "apps/airline/src/assets"],
+        "styles": ["apps/airline/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/airline/src/environments/environment.ts",
+              "with": "apps/airline/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "airline:build:production"
+        },
+        "development": {
+          "browserTarget": "airline:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/airline/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "airline:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/airline/src/**/*.ts",
+          "apps/airline/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/airline"],
+      "options": {
+        "jestConfig": "apps/airline/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
