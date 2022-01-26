@@ -7,3 +7,4 @@ documentation
 node_modules
 logs
 tmp
+.git
