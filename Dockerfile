@@ -13,9 +13,7 @@ COPY . .
 
 RUN npm install
 
-# With @nrwl/workspace@13.4.6 the following build command will fail since our base image doesn't have git installed.
-# @nrwl/workspace@13.4.5 works (see the fix/docker-build branch).
 RUN npm run ng run api:build
-EXPOSE 3000
+EXPOSE 3333
 
 CMD ["node", "dist/apps/api/main.js"]
